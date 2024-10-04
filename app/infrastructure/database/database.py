@@ -31,26 +31,6 @@ async_session_maker = async_sessionmaker(
 )
 
 
-async def get_db_session() -> AsyncSession:
-    """Get the database session."""
-    async_session = async_sessionmaker(
-        engine,
-        class_=AsyncSession,
-        expire_on_commit=False,
-    )
-
-    async with async_session() as session:
-        try:
-            yield session
-            await session.commit()
-            await asyncio.shield(session.close())
-        except Exception:
-            await session.rollback()
-            raise
-        finally:
-            await asyncio.shield(session.close())
-
-
 @asynccontextmanager
 async def get_db_session_context() -> AsyncGenerator[AsyncSession, None]:
     """Get the database session."""
