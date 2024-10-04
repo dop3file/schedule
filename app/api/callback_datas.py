@@ -1,0 +1,1 @@
+SELECT_GROUP = "select_group_{}"

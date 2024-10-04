@@ -19,3 +19,11 @@ class UserOutDTO(BaseModel):
     telegram_id: int
     telegram_username: str
     group_id: Optional[int]
+
+
+class GroupOut(BaseModel):
+    class Config:
+        from_attributes = True
+        
+    id: int
+    name: str

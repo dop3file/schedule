@@ -6,7 +6,7 @@ from app.domain.schemas import UserInDTO
 from app.services.user_service import UserService
 
 
-class UserInjectMiddleware(BaseMiddleware):
+class RegisterUserMiddleware(BaseMiddleware):
     def __init__(self, user_service: UserService):
         self.user_service = user_service
 
@@ -21,7 +21,6 @@ class UserInjectMiddleware(BaseMiddleware):
             telegram_id=user.id,
             telegram_username=user.username
         )
-        data["user_out"] = await self.user_service.get_user(user_in)
-        data["user_in"] = user_in
+        await self.user_service.create_user(user_in)
         result = await handler(event, data)
         return result

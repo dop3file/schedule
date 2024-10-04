@@ -13,7 +13,7 @@ class UserRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def create_user(self, user: UserInDTO) -> None:
+    async def create(self, user: UserInDTO) -> None:
         try:
             stmt = insert(
                     User,
@@ -26,7 +26,7 @@ class UserRepository:
         except SQLAlchemyError as e:
             raise DBError from e
 
-    async def get_user_by_telegram_id(self, telegram_id: int) -> Optional[User]:
+    async def get_by_telegram_id(self, telegram_id: int) -> Optional[User]:
         try:
             stmt = select(
                     User,

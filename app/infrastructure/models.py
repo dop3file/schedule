@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.infrastructure.database.database import Base
+from app.infrastructure.databases.sql_database import Base
 
 
 class Group(Base):

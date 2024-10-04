@@ -1,4 +1,4 @@
-"""This module contains the database configuration."""
+"""This module contains the databases configuration."""
 
 import asyncio
 from collections.abc import AsyncGenerator
@@ -33,7 +33,7 @@ async_session_maker = async_sessionmaker(
 
 @asynccontextmanager
 async def get_db_session_context() -> AsyncGenerator[AsyncSession, None]:
-    """Get the database session."""
+    """Get the databases session."""
     async with async_session_maker() as session:
         try:
             yield session
@@ -46,6 +46,6 @@ async def get_db_session_context() -> AsyncGenerator[AsyncSession, None]:
 
 
 class Base(DeclarativeBase):
-    """Base class for the database models."""
+    """Base class for the databases models."""
 
     pass  # noqa: PIE790

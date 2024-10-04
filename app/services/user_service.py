@@ -12,16 +12,16 @@ class UserService:
 
     async def create_user(self, user: UserInDTO) -> None:
         try:
-            if await self.user_repository.get_user_by_telegram_id(user.telegram_id) is not None:
+            if await self.user_repository.get_by_telegram_id(user.telegram_id) is not None:
                 return
-            await self.user_repository.create_user(user)
+            await self.user_repository.create(user)
         except DBError as e:
             logging.debug(e, exc_info=True)
             raise CreateUserError from e
 
     async def get_user(self, user: UserInDTO) -> Optional[UserOutDTO]:
         try:
-            user = await self.user_repository.get_user_by_telegram_id(user.telegram_id)
+            user = await self.user_repository.get_by_telegram_id(user.telegram_id)
             if user is None:
                 return None
             return UserOutDTO.from_orm(user)
