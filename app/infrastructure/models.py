@@ -13,7 +13,7 @@ class Group(Base):
     __tablename__ = 'groups'
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    name: Mapped[str] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(nullable=False, index=True)
     subgroup: Mapped[int]
     users: Mapped[List["User"]] = relationship(back_populates="group")
 
@@ -58,6 +58,15 @@ class LessonType(Base):
     name: Mapped[str]
 
 
+class Day(Base):
+    """Day model for real day(for example monday, tuesday and etc...)"""
+
+    __tablename__ = 'days'
+
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str]
+
+
 class Lesson(Base):
     """Group model for university group."""
 
@@ -70,3 +79,4 @@ class Lesson(Base):
     teacher_id: Mapped[int] = mapped_column(ForeignKey(Teacher.id))
     group_id: Mapped[int] = mapped_column(ForeignKey(Group.id))
     lesson_type_id: Mapped[int] = mapped_column(ForeignKey(LessonType.id))
+    day_id: Mapped[int] = mapped_column(ForeignKey(Day.id))

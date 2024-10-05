@@ -1,15 +1,16 @@
 from typing import Optional
 
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, update
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.exceptions import DBError
-from app.infrastructure.models import User
 from app.domain.schemas import UserInDTO
+from app.infrastructure.repositories.base_repository import BaseRepository
+from app.infrastructure.models import User
 
 
-class UserRepository:
+class UserRepository(BaseRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -38,3 +39,26 @@ class UserRepository:
             return result.scalar()
         except SQLAlchemyError as e:
             raise DBError from e
+
+    async def update_user_group_id(self, user_id: int, group_id: int) -> None:
+        try:
+            stmt = update(
+                User,
+            ).where(
+                User.id == user_id
+            ).values(
+                group_id=group_id
+            )
+            await self.session.execute(stmt)
+            await self.session.commit()
+        except SQLAlchemyError as e:
+            raise DBError from e
+
+    def delete(self, user_id: int) -> None:
+        pass
+
+    def get_all(self) -> list[User]:
+        pass
+
+    def get_by_id(self, id: int) -> User:
+        ...

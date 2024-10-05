@@ -1,7 +1,7 @@
 import logging
 from typing import Optional
 
-from app.domain.exceptions import DBError, CreateUserError, UserNotFoundError
+from app.domain.exceptions import DBError, CreateUserError, UserNotFoundError, UserError
 from app.infrastructure.repositories.user_repository import UserRepository
 from app.domain.schemas import UserInDTO, UserOutDTO
 
@@ -28,3 +28,13 @@ class UserService:
         except DBError as e:
             logging.debug(e, exc_info=True)
             raise UserNotFoundError from e
+
+    async def update_user_group(self, user: UserInDTO, group_id: int) -> None:
+        try:
+            user = await self.user_repository.get_by_telegram_id(user.telegram_id)
+            if user is None:
+                return None
+            await self.user_repository.update_user_group_id(user.id, group_id)
+        except DBError as e:
+            logging.debug(e, exc_info=True)
+            raise UserError from e

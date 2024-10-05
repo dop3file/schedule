@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Optional
 
 from pydantic import BaseModel
@@ -25,5 +26,17 @@ class GroupOut(BaseModel):
     class Config:
         from_attributes = True
         
+    id: int
+    name: str
+    subgroup: int
+
+
+@dataclass
+class Subgroups:
+    subgroups: list[int]
+    ids: list[int]
+
+
+class DayIn(BaseModel):
     id: int
     name: str
