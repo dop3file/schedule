@@ -1,7 +1,6 @@
 import logging
-from typing import Optional
 
-from app.domain.exceptions import DBError, UserNotFoundError, GroupError
+from app.domain.exceptions import DBError, GroupError
 from app.infrastructure.repositories.group_repository import GroupRepository
 from app.domain.schemas import GroupOut
 

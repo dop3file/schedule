@@ -1,11 +1,11 @@
-from typing import Optional, Any, Sequence
+from typing import Sequence
 
-from sqlalchemy import select, update
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.exceptions import DBError
-from app.infrastructure.models import User, Day, Lesson
+from app.infrastructure.models import Day
 from app.infrastructure.repositories.base_repository import BaseRepository
 
 

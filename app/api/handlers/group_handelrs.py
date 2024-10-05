@@ -3,7 +3,6 @@ from aiogram.types import CallbackQuery
 
 from app.api.callback_datas import SelectGroupCallbackData, SelectSubGroupCallbackData
 from app.api.filters import Text
-from app.api.handlers.user_handlers import router
 from app.api.keyboards import get_subgroups_keyboard
 from app.domain.constants import CHOOSE_GROUP_FINAL_TEXT, CHOOSE_SUBGROUP_TEXT
 from app.domain.schemas import UserInDTO, Subgroups

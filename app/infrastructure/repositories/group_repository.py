@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from sqlalchemy import insert, select
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 

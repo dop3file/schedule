@@ -1,13 +1,9 @@
-import logging
 from typing import Optional
 
 from aiogram import Router, types
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery
-from dependency_injector.wiring import inject, Provide
+from dependency_injector.wiring import inject
 
-from app.api.callback_datas import SelectGroupCallbackData
-from app.api.filters import Text
 from app.api.keyboards import get_groups_keyboard, get_main_keyboard
 from app.domain.constants import WELCOME_MESSAGE, CHOOSE_GROUP_TEXT
 from app.domain.schemas import UserInDTO, UserOutDTO
