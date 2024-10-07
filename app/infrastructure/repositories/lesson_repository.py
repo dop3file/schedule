@@ -37,7 +37,7 @@ class LessonRepository(BaseRepository):
                 )
                 await self.session.execute(stmt)
                 await self.session.commit()
-        except SQLAlchemyError as e:
+        except SQLAlchemyError:
             ...
 
     async def get_lessons_from_day(
@@ -60,7 +60,7 @@ class LessonRepository(BaseRepository):
                 ).order_by(Lesson.time_window_id)
                 result = await self.session.execute(stmt)
                 return result.scalars().all()
-        except SQLAlchemyError as e:
+        except SQLAlchemyError:
             ...
 
     async def create_time_window(
@@ -78,6 +78,6 @@ class LessonRepository(BaseRepository):
                     left_time_border=left_time_border,
                     right_time_border=right_time_border
                 )
-                result = await self.session.execute(stmt)
+                await self.session.execute(stmt)
         except SQLAlchemyError as e:
             logging.debug(e)
