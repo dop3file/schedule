@@ -35,6 +35,7 @@ async def get_subgroups_keyboard(subgroups: Subgroups) -> InlineKeyboardMarkup:
 
 async def get_main_keyboard(days: list[str]) -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardBuilder()
+
     for day in days:
         keyboard.add(
             KeyboardButton(
@@ -46,5 +47,5 @@ async def get_main_keyboard(days: list[str]) -> ReplyKeyboardMarkup:
             text=SETTINGS
         )
     )
-
+    keyboard.adjust(3, 5)
     return keyboard.as_markup()

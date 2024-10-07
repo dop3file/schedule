@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class UserInDTO(BaseModel):
+class UserIn(BaseModel):
     class Config:
         from_attributes = True
 
@@ -12,7 +12,7 @@ class UserInDTO(BaseModel):
     telegram_username: str
 
 
-class UserOutDTO(BaseModel):
+class UserOut(BaseModel):
     class Config:
         from_attributes = True
 
@@ -40,3 +40,21 @@ class Subgroups:
 class DayIn(BaseModel):
     id: int
     name: str
+
+
+class TimeWindow(BaseModel):
+    id: int
+    left_time_border: str
+    right_time_border: str
+
+
+class Teacher(BaseModel):
+    fullname: str
+
+
+class LessonOut(BaseModel):
+    name: str
+    time_window: TimeWindow
+    teacher: Teacher
+    lesson_type: str
+    audience: str

@@ -2,7 +2,7 @@ from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
 
-from app.domain.schemas import UserInDTO
+from app.domain.schemas import UserIn
 from app.injectors.injectors import get_injectors
 from app.services.user_service import UserService
 
@@ -19,7 +19,7 @@ class InjectMiddleware(BaseMiddleware):
     ) -> Any:
 
         user = data["event_from_user"]
-        user_in = UserInDTO(
+        user_in = UserIn(
             telegram_id=user.id,
             telegram_username=user.username
         )

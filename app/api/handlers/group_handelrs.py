@@ -5,7 +5,7 @@ from app.api.callback_datas import SelectGroupCallbackData, SelectSubGroupCallba
 from app.api.filters import Text
 from app.api.keyboards import get_subgroups_keyboard
 from app.domain.constants import CHOOSE_GROUP_FINAL_TEXT, CHOOSE_SUBGROUP_TEXT
-from app.domain.schemas import UserInDTO, Subgroups
+from app.domain.schemas import UserIn, Subgroups
 from app.services.group_service import GroupService
 from app.services.user_service import UserService
 
@@ -16,7 +16,7 @@ router = Router()
 @router.callback_query(Text(startswith=SelectGroupCallbackData.callback_data.format("")))
 async def choose_group(
     callback: CallbackQuery,
-    user_in: UserInDTO,
+    user_in: UserIn,
     user_service: UserService,
     group_service: GroupService
 ):
@@ -36,7 +36,7 @@ async def choose_group(
 @router.callback_query(Text(startswith=SelectSubGroupCallbackData.callback_data.format("")))
 async def choose_subgroup(
     callback: CallbackQuery,
-    user_in: UserInDTO,
+    user_in: UserIn,
     user_service: UserService,
     group_service: GroupService
 ):

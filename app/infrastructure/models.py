@@ -36,8 +36,8 @@ class TimeWindow(Base):
     __tablename__ = 'time_windows'
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    left_time_border: Mapped[datetime]
-    right_time_border: Mapped[datetime]
+    left_time_border: Mapped[str]
+    right_time_border: Mapped[str]
 
 
 class Teacher(Base):
@@ -80,3 +80,4 @@ class Lesson(Base):
     group_id: Mapped[int] = mapped_column(ForeignKey(Group.id))
     lesson_type_id: Mapped[int] = mapped_column(ForeignKey(LessonType.id))
     day_id: Mapped[int] = mapped_column(ForeignKey(Day.id))
+    audience: Mapped[str]

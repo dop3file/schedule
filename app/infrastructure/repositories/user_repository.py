@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.exceptions import DBError
-from app.domain.schemas import UserInDTO
+from app.domain.schemas import UserIn
 from app.infrastructure.repositories.base_repository import BaseRepository
 from app.infrastructure.models import User
 
@@ -14,7 +14,7 @@ class UserRepository(BaseRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def create(self, user: UserInDTO) -> None:
+    async def create(self, user: UserIn) -> None:
         try:
             stmt = insert(
                     User,
@@ -42,16 +42,18 @@ class UserRepository(BaseRepository):
 
     async def update_user_group_id(self, user_id: int, group_id: int) -> None:
         try:
-            stmt = update(
-                User,
-            ).where(
-                User.id == user_id
-            ).values(
-                group_id=group_id
-            )
-            await self.session.execute(stmt)
-            await self.session.commit()
+            async with self.session.begin():
+                stmt = update(
+                    User,
+                ).where(
+                    User.id == user_id
+                ).values(
+                    group_id=group_id
+                )
+                await self.session.execute(stmt)
+                await self.session.commit()
         except SQLAlchemyError as e:
+            await self.session.rollback()
             raise DBError from e
 
     def delete(self, user_id: int) -> None:
