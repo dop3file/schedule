@@ -5,6 +5,8 @@ Schedule - schedule bot for university.
 
 With clean architecture stuff
 
+With ```Github Actions CI``` and ```ruff + mypy```
+
 ## Installation & Usage
 
 Not remember to configure .env with .env.example
