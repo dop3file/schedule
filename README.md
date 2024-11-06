@@ -1,5 +1,5 @@
 # schedule
-Schedule - schedule bot for university. 
+Schedule - schedule bot for educational institution. 
 
 *Telegram bot implemented using* ```Aiogram, Docker + Docker-compose, Postgres, Alembic```
 
